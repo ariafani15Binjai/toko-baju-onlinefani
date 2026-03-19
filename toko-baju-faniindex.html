@@ -6,21 +6,30 @@
 <title>Toko Baju Online</title>
 <style>
   body { font-family: Arial; margin: 20px; }
-  .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; vertical-align: top; }
+  h1 { text-align: center; }
+  .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; vertical-align: top; text-align: center; }
   .product img { width: 100%; height: 200px; object-fit: cover; }
-  .btn { background-color: blue; color: white; border: none; padding: 5px 10px; cursor: pointer; margin-top: 5px; }
+  .btn { background-color: green; color: white; border: none; padding: 5px 10px; cursor: pointer; margin-top: 5px; }
 </style>
 </head>
 <body>
 <h1>Toko Baju Online</h1>
+
 <div id="products"></div>
 
 <script>
+// =====================
+// DAFTAR PRODUK
+// =====================
+// Tambahkan, hapus, atau ubah produk di sini
+// Format: { name: "Nama Produk", price: HargaDalamAngka, image: "URL Gambar" }
 const products = [
   { name: "Kaos Putih", price: 100000, image: "https://i.ibb.co/4pDNDk1/kaos-putih.jpg" },
   { name: "Kemeja Hitam", price: 150000, image: "https://i.ibb.co/7Xc1b8s/kemeja-hitam.jpg" },
   { name: "Jaket Jeans", price: 250000, image: "https://i.ibb.co/1mY9VqZ/jaket-jeans.jpg" }
 ];
+
+const waNumber = "6285359114417"; // Ganti dengan nomor WhatsApp-mu (gunakan format internasional tanpa tanda +, misal 628123456789)
 
 const container = document.getElementById("products");
 products.forEach(p => {
@@ -30,13 +39,17 @@ products.forEach(p => {
     <img src="${p.image}" alt="${p.name}">
     <h3>${p.name}</h3>
     <p>Rp ${p.price.toLocaleString()}</p>
-    <button class="btn" onclick="buy('${p.name}', ${p.price})">Beli</button>
+    <button class="btn" onclick="buy('${p.name}', ${p.price})">Beli via WhatsApp</button>
   `;
   container.appendChild(div);
 });
 
+// =====================
+// FUNGSI BELI
+// =====================
 function buy(name, price) {
-  alert(`Kamu membeli ${name} seharga Rp ${price.toLocaleString()}`);
+  const text = encodeURIComponent(`Halo, saya ingin membeli ${name} seharga Rp ${price.toLocaleString()}`);
+  window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
 }
 </script>
 </body>
